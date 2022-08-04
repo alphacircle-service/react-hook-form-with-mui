@@ -1,9 +1,8 @@
 import { TextField } from '@mui/material'
-import { Control, Controller, FieldValues } from 'react-hook-form'
+import { UnControlledComponentProps } from 'models'
+import { Controller } from 'react-hook-form'
 
-export interface FormInputProps {
-  control: Control<FieldValues>
-}
+export type FormInputProps = UnControlledComponentProps
 export default function FormInput({ control }: FormInputProps) {
   return (
     <Controller

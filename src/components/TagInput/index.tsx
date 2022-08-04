@@ -1,10 +1,9 @@
-import { Autocomplete, Box, SxProps, TextField } from '@mui/material'
+import { Autocomplete, TextField } from '@mui/material'
+import { UnControlledComponentProps } from 'models'
 import { SyntheticEvent } from 'react'
-import { Control, Controller, FieldValues } from 'react-hook-form'
+import { Controller } from 'react-hook-form'
 
-export interface TagInputProps {
-  control: Control<FieldValues>
-}
+export type TagInputProps = UnControlledComponentProps
 export default function TagInput({ control }: TagInputProps) {
   return (
     <Controller
@@ -15,7 +14,7 @@ export default function TagInput({ control }: TagInputProps) {
           freeSolo
           multiple
           options={[]}
-          onChange={(e: SyntheticEvent<Element, Event>, v: string[] | null) => {
+          onChange={(_: SyntheticEvent<Element, Event>, v: string[] | null) => {
             onChange(v)
           }}
           renderInput={params => (
