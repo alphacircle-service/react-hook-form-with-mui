@@ -1,6 +1,9 @@
 import { Box, Button, SxProps } from '@mui/material'
 import FormInput from 'components/FormInput'
-import TagInput from 'components/TagInput'
+import TagInputController from 'components/TagInputController'
+import TagInputUseController, {
+  TagInputUseControllerProps,
+} from 'components/TagInputUseController'
 import React from 'react'
 import { FieldValues, SubmitHandler, useForm } from 'react-hook-form'
 
@@ -11,6 +14,11 @@ export default function App() {
     console.log(evt)
   }
 
+  const tagInputUseController: TagInputUseControllerProps = {
+    name: 'TagInputUseController',
+    control,
+  }
+
   return (
     <Box
       sx={AppLayout}
@@ -18,8 +26,9 @@ export default function App() {
       onSubmit={handleSubmit(handleOnSubmit)}
     >
       <Box sx={AppContainer}>
-        <TagInput control={control} />
+        <TagInputController control={control} />
         <FormInput control={control} />
+        <TagInputUseController {...tagInputUseController} />
         <Button type="submit">Submit</Button>
       </Box>
     </Box>
@@ -39,6 +48,6 @@ const AppContainer: SxProps = {
   display: 'flex',
   flexDirection: 'column',
   width: '50%',
-  height: '175px',
+  height: '250px',
   justifyContent: 'space-between',
 }
