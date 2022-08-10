@@ -1,8 +1,9 @@
 import { Autocomplete, TextField } from '@mui/material'
+import { FormValues } from 'models'
 import { SyntheticEvent } from 'react'
 import { useController, UseControllerProps } from 'react-hook-form'
 
-export type TagInputUseControllerProps = UseControllerProps
+export type TagInputUseControllerProps = UseControllerProps<FormValues>
 export default function TagInputUseController(
   tagInputuseControllerProps: TagInputUseControllerProps,
 ) {
@@ -22,6 +23,7 @@ export default function TagInputUseController(
       multiple
       options={[]}
       onChange={handleChange}
+      value={restFields.value || []}
       renderInput={parmas => (
         <TextField label={field.name} {...parmas} {...restFields} />
       )}

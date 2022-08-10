@@ -1,22 +1,25 @@
 import { Box, Button, SxProps } from '@mui/material'
 import FormInput from 'components/FormInput'
 import TagInputController from 'components/TagInputController'
-import TagInputUseController, {
-  TagInputUseControllerProps,
-} from 'components/TagInputUseController'
+import TagInputUseController from 'components/TagInputUseController'
+import { FormValues } from 'models'
 import React from 'react'
-import { FieldValues, SubmitHandler, useForm } from 'react-hook-form'
+import { SubmitHandler, useForm } from 'react-hook-form'
+
+const defaultValues: FormValues = {
+  FormInput: 'FormInput Default Value',
+  TagInputController: ['A', 'B'],
+  TagInputUseController: ['C', 'D'],
+}
 
 export default function App() {
-  const { control, handleSubmit } = useForm({ reValidateMode: 'onBlur' })
+  const { control, handleSubmit } = useForm<FormValues>({
+    reValidateMode: 'onBlur',
+    defaultValues,
+  })
 
-  const handleOnSubmit: SubmitHandler<FieldValues> = evt => {
+  const handleOnSubmit: SubmitHandler<FormValues> = evt => {
     console.log(evt)
-  }
-
-  const tagInputUseController: TagInputUseControllerProps = {
-    name: 'TagInputUseController',
-    control,
   }
 
   return (
@@ -28,7 +31,7 @@ export default function App() {
       <Box sx={AppContainer}>
         <TagInputController control={control} />
         <FormInput control={control} />
-        <TagInputUseController {...tagInputUseController} />
+        <TagInputUseController name="TagInputUseController" control={control} />
         <Button type="submit">Submit</Button>
       </Box>
     </Box>
