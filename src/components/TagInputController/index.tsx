@@ -1,12 +1,15 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { Autocomplete, TextField } from '@mui/material'
-import { UnControlledComponentProps } from 'models'
+import { FormComponentProps } from 'models'
 import { SyntheticEvent } from 'react'
-import { Controller, ControllerRenderProps } from 'react-hook-form'
+import { Controller } from 'react-hook-form'
 
-const name = 'TagInputController'
-export type TagInputProps = UnControlledComponentProps
+export type TagInputProps<T> = FormComponentProps<T>
 
-export default function TagInputController({ control }: TagInputProps) {
+export default function TagInputController<T>({
+  control,
+  name,
+}: TagInputProps<T>) {
   const handleChange =
     (onChange: (event: any[] | null) => void) =>
     (_: SyntheticEvent<Element, Event>, v: string[] | null) => {
@@ -17,12 +20,12 @@ export default function TagInputController({ control }: TagInputProps) {
     <Controller
       control={control}
       name={name}
-      render={({ field: { ref, onChange, ...field } }) => (
+      render={({ field: { onChange, ...field } }) => (
         <Autocomplete
           freeSolo
           multiple
           options={[]}
-          value={field.value}
+          value={field.value as any[]}
           onChange={handleChange(onChange)}
           renderInput={params => (
             <TextField label={name} {...params} {...field} />

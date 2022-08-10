@@ -1,11 +1,6 @@
-import { FieldValues } from 'react-hook-form'
+import { Control, Path } from 'react-hook-form'
 
-export interface UnControlledComponentProps {
-  control: Control<FormValues>
-}
-
-export interface FormValues extends FieldValues {
-  FormInput: string
-  TagInputController: string[]
-  TagInputUseController: string[]
+export interface FormComponentProps<T> {
+  control: Control<T>
+  name: Path<T>
 }

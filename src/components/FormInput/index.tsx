@@ -1,15 +1,14 @@
 import { TextField } from '@mui/material'
-import { UnControlledComponentProps } from 'models'
+import { FormComponentProps } from 'models'
 import { Controller } from 'react-hook-form'
 
-export type FormInputProps = UnControlledComponentProps
-export default function FormInput({ control }: FormInputProps) {
+export default function FormInput<T>({ control, name }: FormComponentProps<T>) {
   return (
     <Controller
       control={control}
-      name="FormInput"
+      name={name}
       render={({ field }) => (
-        <TextField {...field} value={field.value || ''} label="FormInput" />
+        <TextField {...field} value={field.value || ''} label={name} />
       )}
     />
   )
